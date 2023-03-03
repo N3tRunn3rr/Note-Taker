@@ -27,3 +27,9 @@ app.get('/api', (req, res) => res.json(dbData));
 app.listen(PORT, () =>
   console.log(`Example app listening at http://localhost:${PORT}`)
 );
+
+module.exports = app;
+
+//TODO: figure out which of these are needed
+// const fs = require('fs');
+// const util = require('util');
