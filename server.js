@@ -1,6 +1,6 @@
 const express = require('express');
 const path = require('path');
-const PORT = 3001;
+const PORT = process.env.PORT || 3001;
 
 const dbData = require('./db/db.json');
 
@@ -10,12 +10,12 @@ app.use(express.json());
 
 app.use(express.static('public'));
 
-//route for homepage 
+//GET route for homepage 
 app.get('/', (req, res) =>
   res.sendFile(path.join(__dirname, '/public/index.html'))
 );
 
-//route for notes page
+//GET route for notes page
 app.get('/notes', (req, res) =>
     res.sendFile(path.join(__dirname, '/public/notes.html'))
 );
