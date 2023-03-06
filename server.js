@@ -1,7 +1,6 @@
 const express = require('express');
 const path = require('path');
-const api = require('./routes/index.js');
-const { clog } = require('./middleware/clog.js');
+var api = require('./routes/api');
 
 const PORT = process.env.PORT || 3001;
 
@@ -11,7 +10,8 @@ const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static('public'));
-app.use('/', api);
+
+app.use('/api', api);
 
 //GET route for notes page 
 app.get('/notes', (req, res) => {

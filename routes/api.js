@@ -1,36 +1,30 @@
 const api = require('express').Router();
 const { v4: uuidv4 } = require('uuid');
 const fs = require('fs');
-// const { readFromFile, readAndAppend } = require('../helpers/fsUtil');
+const path = require('path');
 
 
-//GET /api/notes should read the db.json file and return all saved notes as JSON.
+
+const noteData = fs.readFileSync(path.join(__dirname, '../db/db.json'), 'utf8');
+console.log(noteData);
+const noteArr = JSON.parse(noteData);
+console.log(noteArr);
+
+
+/// GET notes route
 api.get('/notes', (req, res) => {
-  console.info(`${req.method} request received to get notes`);
-  fs.readFromFile('./db/db.json').then((data) => res.json(JSON.parse(data)));
+  res.sendFile(path.join(__dirname, '../db/db.json'));
+  console.info(`${req.method} request received to get notes from api.js`);
 });
 
-
-
-
-// POST Route to save a new note and add it to the db.json file
+// POST notes route
 api.post('/notes', (req, res) => {
-  console.info(`${req.method} request received to add a note`);
-  console.log(req.body);
+  const newNote = {title: req.body.title, text: req.body.text, id: uuidv4()};
+  noteArr.push(newNote);
+  fs.writeFileSync(path.join(__dirname, '../db/db.json'), JSON.stringify(noteArr));
+  res.json(noteArr);
+  return console.log('New note added: ' + newNote.id);
+});
 
-  const { note } = req.body;
-  
-    if (note) {
-      const newNote = {
-        note,
-        note_id: uuidv4(),
-      };
-  
-      fs.readAndAppend(newNote, './db/db.json');
-      res.JSON('Note added successfully');
-    } else {
-      res.error('Error in adding note');
-    }
-  });
 
 module.exports = api;
