@@ -1,6 +1,1 @@
-[
-    {
-        "title":"Test Title",
-        "text":"Test text"
-    }
-]
+[{"title":"Test Title","text":"Test text"},{"title":"new note","text":"new note","id":"b66a4f31-5514-463a-aaf1-753f5994af40"},{"title":"note 2","text":"note 2","id":"242e5895-3a3e-4a0a-bfee-413f507cd334"},{"title":"Is it working?","text":"I think everything if functioning properly now ","id":"2d31aaef-5598-4b60-915d-03a0c1f0486d"}]
